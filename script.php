@@ -10,13 +10,13 @@ foreach ($iterator as $info) {
     $mimeType = mime_content_type($info->getPathname());
     if ($mimeType == 'image/jpeg') {
         $count++;
-        optimizeImage($info->getPathname());
+        optimizeImage($info->getPathname(), $quality);
     }
 }
 
 echo "Complete for " . $count . ' jpg images' . PHP_EOL;
 
-function optimizeImage($originalPath) {
+function optimizeImage($originalPath, $quality = 75) {
     $tmpFile = '/tmp/' . uniqid('opt');
 
     $cJpegCommand = "/opt/mozjpeg/bin/cjpeg -outfile {$tmpFile} -progressive -optimize -quality {$quality} '{$originalPath}' 2>&1";
