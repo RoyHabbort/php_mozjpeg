@@ -1,7 +1,7 @@
 <?php
 
-$path = $argv[1] ?? './';
-$quality = (int) $argv[2] ?? 75;
+$path = !empty($argv[1]) ? $argv[1] : './';
+$quality = !empty($argv[2]) ? (int) $argv[2] : 75;
 $directory = new \RecursiveDirectoryIterator($path);
 $iterator = new \RecursiveIteratorIterator($directory);
 
