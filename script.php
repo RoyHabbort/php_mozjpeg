@@ -1,9 +1,9 @@
 <?php
 
-$path = './';
+$path = $argv[1] ?? './';
+$quality = (int) $argv[2] ?? 75;
 $directory = new \RecursiveDirectoryIterator($path);
 $iterator = new \RecursiveIteratorIterator($directory);
-$files = array();
 
 $count = 0;
 foreach ($iterator as $info) {
@@ -19,7 +19,7 @@ echo "Complete for " . $count . ' jpg images' . PHP_EOL;
 function optimizeImage($originalPath) {
     $tmpFile = '/tmp/' . uniqid('opt');
 
-    $cJpegCommand = "/opt/mozjpeg/bin/cjpeg -outfile {$tmpFile} -progressive -optimize -quality 75 '{$originalPath}' 2>&1";
+    $cJpegCommand = "/opt/mozjpeg/bin/cjpeg -outfile {$tmpFile} -progressive -optimize -quality {$quality} '{$originalPath}' 2>&1";
 
     exec(
         $cJpegCommand,
